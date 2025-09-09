@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block title %}Register{% endblock %}
+    {% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Register</h2>
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" name="name" title="Enter your full name" placeholder="Full Name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" name="email" placeholder="eg. cs@example.com" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone:</label>
+                <input type="text" class="form-control" name="phone" title="Enter your phone number" placeholder="Phone Number" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" name="password" title="Enter your password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-success">Register</button>
+        </form>
+        <div class="mt-3 text-center">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

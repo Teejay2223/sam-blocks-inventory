@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Add Sales Record{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Add Sales Record</h2>
+    <form method="POST" action="{{ url_for('add_sales') }}">
+        <div class="mb-3">
+            <label for="sale_date" class="form-label">Sale Date</label>
+            <input type="date" class="form-control" id="sale_date" name="sale_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" step="0.01" class="form-control" id="amount" name="amount" placeholder="Enter sale amount" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Sale</button>
+    </form>
+</div>
+{% endblock %}

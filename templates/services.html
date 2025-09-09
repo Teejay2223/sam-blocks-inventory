@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <title>Our Services - S.A.M Blocks</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+</head> 
+<body> 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+    <a class="navbar-brand" href="{{ url_for('index') }}">S.A.M Blocks</a> 
+    <div class="collapse navbar-collapse"> 
+      <ul class="navbar-nav ml-auto"> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('list_materials') }}">Materials</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('list_orders') }}">Orders</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('list_customers') }}">Customers</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Services</a></li> 
+      </ul> 
+    </div> 
+  </nav> 
+ 
+  <div class="container mt-5"> 
+    <h1 class="text-center mb-4" style="color: #333;">Our Services</h1> 
+     
+    <div class="row"> 
+      <div class="col-md-4 mb-4"> 
+        <div class="card h-100 shadow-sm"> 
+          <div class="card-body"> 
+            <h5 class="card-title">Block Production</h5> 
+            <p class="card-text">We produce strong, high-quality blocks suitable for all kinds of building projects, big or small.</p> 
+          </div> 
+        </div> 
+      </div> 
+ 
+      <div class="col-md-4 mb-4"> 
+        <div class="card h-100 shadow-sm"> 
+          <div class="card-body"> 
+            <h5 class="card-title">Custom Orders</h5> 
+            <p class="card-text">Need something special? We accept custom block sizes and special orders to fit your project needs.</p> 
+          </div> 
+        </div> 
+      </div> 
+ 
+      <div class="col-md-4 mb-4"> 
+        <div class="card h-100 shadow-sm"> 
+          <div class="card-body"> 
+            <h5 class="card-title">Material Supply</h5> 
+            <p class="card-text">We supply sand, cement, gravel, and other raw materials directly to your site — on time and hassle-free.</p> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+ 
+    <div class="text-center mt-5"> 
+      <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Back to Home</a> 
+    </div> 
+  </div> 
+ 
+  <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script> 
+</body> 
+</html>

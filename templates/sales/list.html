@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Sales Records{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Sales Records</h2>
+    <table class="table table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Sale Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale.id }}</td>
+                <td>{{ sale.sale_date }}</td>
+                <td>${{ sale.amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

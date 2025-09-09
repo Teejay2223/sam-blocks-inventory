@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Sales Data{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Monthly Sales</h2>
+    <div class="chart-container p-4 shadow-sm bg-white rounded">
+        <canvas id="salesChart" width="400" height="200"></canvas>
+    </div>
+</div>
+
+<script>
+    // Get data passed from Flask
+    const months = {{ months | tojson }};
+    const totalSales = {{ total_sales | tojson }};
+
+    // Render the chart
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'line', // Line chart for sales trends
+        data: {
+            labels: months, // X-axis labels
+            datasets: [{
+                label: 'Total Sales ($)',
+                data: totalSales, // Y-axis data
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Light green fill
+                borderColor: 'rgba(75, 192, 192, 1)', // Green border
+                borderWidth: 2,
+                tension: 0.4 // Smooth curve
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: '#343a40',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: '#007bff',
+                    borderWidth: 1
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true // Start Y-axis at 0
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

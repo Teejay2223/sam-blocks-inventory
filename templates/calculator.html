@@ -1,0 +1,98 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <title>Block Calculator - S.A.M Blocks</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+  <style> 
+    body { 
+      background-color: #f8f9fa; 
+    } 
+    .calculator-card { 
+      max-width: 500px; 
+      margin: 0 auto; 
+      margin-top: 50px; 
+      padding: 30px; 
+      background: white; 
+      border-radius: 10px; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    } 
+  </style> 
+</head> 
+<body> 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+    <a class="navbar-brand" href="{{ url_for('index') }}">S.A.M Blocks</a> 
+    <div class="collapse navbar-collapse"> 
+      <ul class="navbar-nav ml-auto"> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('list_materials') 
+}}">Materials</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('list_orders') }}">Orders</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('list_customers') 
+}}">Customers</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Services</a></li> 
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('calculator') }}">Calculator</a></li> 
+      </ul> 
+    </div> 
+  </nav> 
+ 
+  <div class="container"> 
+    <div class="calculator-card"> 
+      <h2 class="text-center mb-4">Block Cost Calculator</h2> 
+      <form id="calcForm"> 
+        <div class="form-group"> 
+          <label for="blockType">Select Block Type:</label> 
+          <select class="form-control" id="blockType" required> 
+            <option value="">-- Select --</option> 
+            <option value="4">4 Inches (₦400/block)</option>
+            <option value="6">6 Inches (₦400/block)</option>
+            <option value="8">8 Inches (₦500/block)</option> 
+            <option value="9">9 Inches (₦600/block)</option> 
+            <option value="6"> i shaped interlocks (₦4,500/meter)</option>
+          </select> 
+        </div> 
+        <div class="form-group mt-3"> 
+          <label for="quantity">Enter Quantity:</label> 
+          <input type="number" class="form-control" id="quantity" min="1" required> 
+        </div> 
+        <div class="text-center mt-4"> 
+          <button type="submit" class="btn btn-success btn-block">Calculate</button> 
+        </div> 
+      </form> 
+ 
+      <div id="result" class="mt-4 text-center" style="display: none;"> 
+        <h4>Estimated Cost:</h4> 
+        <p id="cost" style="font-size: 24px; font-weight: bold; color: #28a745;"></p> 
+      </div> 
+    </div> 
+  </div> 
+ 
+  <script> 
+    document.getElementById('calcForm').addEventListener('submit', function(e) { 
+      e.preventDefault(); 
+      const blockType = document.getElementById('blockType').value; 
+      const quantity = parseInt(document.getElementById('quantity').value); 
+      let pricePerBlock = 0; 
+ 
+      if (blockType == '4') { 
+        pricePerBlock = 400; }
+      else if (blockType == '6') { 
+        pricePerBlock = 450; 
+      }else if (blockType == '8') { 
+        pricePerBlock = 500; }
+       else if (blockType == '9') { 
+        pricePerBlock = 600; 
+      } 
+ 
+      if (pricePerBlock && quantity > 0) { 
+        const total = pricePerBlock * quantity; 
+        document.getElementById('cost').innerText = `₦${total.toLocaleString()}`; 
+        document.getElementById('result').style.display = 'block'; 
+      } 
+    }); 
+  </script> 
+ 
+  <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script> 
+</body> 
+</html> 

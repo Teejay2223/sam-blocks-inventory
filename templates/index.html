@@ -1,0 +1,61 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}Home - S.A.M Blocks{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">Welcome to S.A.M Blocks Inventory System</h2>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4"></h2>
+  <div class="row">
+      <div class="col-md-4 mb-4">
+          <img src="{{ url_for('static', filename='image1.jpg') }}" class="img-fluid rounded" alt="Image 1">
+      </div>
+      <div class="col-md-4 mb-4">
+          <img src="{{ url_for('static', filename='image2.jpg') }}" class="img-fluid rounded" alt="Image 2">
+      </div>
+      <div class="col-md-4 mb-4">
+          <img src="{{ url_for('static', filename='image3.jpg') }}" class="img-fluid rounded" alt="Image 3">
+      </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4">C.E.O'S Detail</h2>
+  <div class="card card-gradient" style="width: 50rem; margin: 0 auto;">
+      <img src="{{ url_for('static', filename='baba.jpg') }}" class="card-img-top" alt="Person Image"  height="200px" width="200px">
+      <div class="card-body text-center">
+          <h5 class="card-title">SHUAIB ALH MATO</h5>
+          <p class="card-text">
+              <strong>TITLE:</strong> C.E.O<br>
+              <strong>Phone:</strong> 08029111991<br>
+              <strong>Email:</strong> shuaibalhmato@gmail.com<br>
+              <strong>Address:</strong> Donetebet extension, Damaturu, Yobe State<br>
+              <strong>Company:</strong> S.A.M Blocks<br>
+          </p>
+      </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Recent Orders</h2>
+  <div class="row">
+    {% for order in orders %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Order ID: {{ order.id }}</h5>
+          <p class="card-text">
+            <strong>Customer:</strong> {{ order.customer_name }}<br>
+            <strong>Item Type:</strong> {{ order.item_type }}<br>
+            <strong>Quantity:</strong> {{ order.qty }}
+          </p>
+          <a href="{{ url_for('view_order', order_id=order.id) }}" class="btn btn-outline-primary btn-sm">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

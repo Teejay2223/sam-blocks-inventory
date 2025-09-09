@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Record Production{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Record Production</h2>
+
+    <!-- Form for recording production -->
+    <form method="POST" class="mb-4">
+        <div class="form-group">
+            <label for="block_type">Block Type:</label>
+            <input type="text" name="block_type" id="block_type" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="qty">Quantity:</label>
+            <input type="number" name="qty" id="qty" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="date_produced">Date Produced:</label>
+            <input type="date" name="date_produced" id="date_produced" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Record Production</button>
+    </form>
+
+    <!-- Display warning if any -->
+    {% if warning %}
+    <div class="alert alert-warning">{{ warning }}</div>
+    {% endif %}
+
+    <!-- Display recent productions -->
+    <h3>Recent Productions</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Block Type</th>
+                <th>Quantity</th>
+                <th>Date Produced</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for production in productions %}
+            <tr>
+                <td>{{ production.block_type }}</td>
+                <td>{{ production.qty }}</td>
+                <td>{{ production.date_produced }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

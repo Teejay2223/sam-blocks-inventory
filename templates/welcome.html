@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="display-4">Welcome to <span style="color:#ffd966;">S.A.M Blocks & Interlocks</span></h1>
+    <p class="lead">Strong. Reliable. Built to last.</p>
+     <div class="mb-4">
+        <img src="static/256aabfebe249b11cb06c4040b00ac7f.jpg" alt="Blocks" class="img-fluid rounded shadow" style="max-width: 200px;">
+    </div>
+
+    <div class="mt-4">
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg me-2"> Login</a>
+      <a href="{{ url_for('register') }}" class="btn btn-outline-primary btn-lg">Register</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<div class="container mt-5">
+  <h2 class="section-title">Why Choose Us?</h2>
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="card p-4">
+        <div class="card-body">
+          <h5 class="card-title">High Quality</h5>
+          <p class="card-text">We provide durable blocks and interlocks built with precision.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-4">
+        <div class="card-body">
+          <h5 class="card-title">Affordable</h5>
+          <p class="card-text">Competitive prices without compromising on strength or style.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-4">
+        <div class="card-body">
+          <h5 class="card-title">Trusted Service</h5>
+          <p class="card-text">Our customers rely on us for timely delivery and consistency.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white mt-5 p-4 text-center">
+  <p>&copy; 2025 S.A.M Blocks & Interlocks | All Rights Reserved</p>
+  <p>📍 Yobe State, Nigeria | 📞 +234-802-911-1991 | ✉️ samblocks@gmail.com</p>
+  <div>
+    <a href="https://facebook.com" target="_blank">Facebook</a> | 
+    <a href="https://instagram.com" target="_blank">Instagram</a> | 
+    <a href="https://twitter.com" target="_blank">Twitter</a>
+  </div>
+</footer>
+{% endblock %}

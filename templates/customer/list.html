@@ -1,0 +1,28 @@
+{% extends "index.html" %} 
+
+{% block content %}
+<h2 class="text-center my-4">Customers</h2>
+<a href="{{ url_for('add_customer') }}" class="btn btn-primary mb-3">Add Customer</a>
+
+<div class="row">
+  {% for customer in customers %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ customer.name }}</h5>
+          <p class="card-text">
+            <strong>Phone:</strong> {{ customer.phone }}<br>
+            <strong>Address:</strong> {{ customer.address }}
+          </p>
+          <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div><br>
+
+{% if customers|length == 0 %}
+  <div class="alert alert-info text-center">No customers found.</div>
+{% endif %}
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Home</a>
+{% endblock %}
