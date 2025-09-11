@@ -241,7 +241,7 @@ def register():
             return redirect(url_for('register'))
 
         db.execute('INSERT INTO customers (name, email, phone, password) VALUES (?, ?, ?, ?)', 
-                   (name, email, phone, hashed_password))
+                (name, email, phone, hashed_password))
         db.commit()
 
         flash('Registration successful! You can now log in.', 'success')
