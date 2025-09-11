@@ -232,6 +232,8 @@ def register():
         phone = request.form['phone']
         password = request.form['password']
         hashed_password = generate_password_hash(password)
+        return render_template('auth/register.html')
+
 
         db = get_db()
         # Check if email already exists
