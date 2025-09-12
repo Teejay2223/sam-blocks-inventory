@@ -232,7 +232,8 @@ def register():
         phone = request.form['phone']
         password = request.form['password']
         hashed_password = generate_password_hash(password)
-        return render_template('auth/register.html')
+        return render_template('register.html')
+
 
 
         db = get_db()
