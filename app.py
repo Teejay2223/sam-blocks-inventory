@@ -232,24 +232,29 @@ def register():
         phone = request.form['phone']
         password = request.form['password']
         hashed_password = generate_password_hash(password)
-        return render_template('register.html')
-
-
 
         db = get_db()
+
         # Check if email already exists
         existing_user = db.execute('SELECT * FROM customers WHERE email = ?', (email,)).fetchone()
         if existing_user:
             flash('Email already registered. Please use a different email or log in.', 'danger')
             return redirect(url_for('register'))
 
-        db.execute('INSERT INTO customers (name, email, phone, password) VALUES (?, ?, ?, ?)', 
-                (name, email, phone, hashed_password))
+        # Insert new user
+        db.execute(
+            'INSERT INTO customers (name, email, phone, password) VALUES (?, ?, ?, ?)',
+            (name, email, phone, hashed_password)
+        )
         db.commit()
 
         flash('Registration successful! You can now log in.', 'success')
         return redirect(url_for('login'))
+
+    # For GET request → show the form
     return render_template('register.html')
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
