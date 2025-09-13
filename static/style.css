@@ -24,7 +24,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: url("static/256aabfebe249b11cb06c4040b00ac7f.jpg") no-repeat center center fixed;
+  background: url("/static/256aabfebe249b11cb06c4040b00ac7f.jpg") no-repeat center center fixed;
   background-size: cover;
   padding-left: 20px;
   padding-right: 20px;
@@ -42,7 +42,7 @@ body {
   padding: 40px;
 }
 
-a.btn {
+a.btn, .btn {
   text-decoration: none !important;
 }
 

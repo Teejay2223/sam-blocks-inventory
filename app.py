@@ -157,6 +157,22 @@ def add_material():
         return redirect(url_for('list_materials'))
     return render_template('materials/add.html')
 
+@app.route('/materials/<int:material_id>/edit', methods=['GET', 'POST'])
+def edit_material(material_id):
+    db = get_db()
+    material = db.execute('SELECT * FROM raw_materials WHERE id = ?', (material_id,)).fetchone()
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        size = request.form['size']
+        price = request.form['price']
+        db.execute('UPDATE raw_materials SET name=?, description=?, size=?, price=? WHERE id=?',
+                   (name, description, size, price, material_id))
+        db.commit()
+        flash('Material updated successfully!', 'success')
+        return redirect(url_for('list_materials'))
+    return render_template('materials/edit.html', material=material)
+
 # Order Management
 @app.route('/orders')
 def list_orders():
@@ -282,6 +298,7 @@ def dashboard():
         flash('Access denied: Admins only.', 'danger')
         return redirect(url_for('login'))
     db = get_db()
+    # Example query for monthly production
     production_data = db.execute('''
         SELECT strftime('%m', date_produced) AS month, SUM(qty) AS total_qty
         FROM finished_blocks
@@ -292,7 +309,10 @@ def dashboard():
     months = [row['month'] for row in production_data]
     quantities = [row['total_qty'] for row in production_data]
 
-    return render_template('dashboard.html', months=months, quantities=quantities)
+    return render_template('dashboard.html',
+                           user_name=session.get('user_name'),
+                           months=months,
+                           quantities=quantities)
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
