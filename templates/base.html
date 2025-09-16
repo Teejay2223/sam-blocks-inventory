@@ -48,7 +48,8 @@
         <ul class="navbar-nav ms-auto">
           {% if not session.get('user_id') %}
             <!-- Guest links -->
-        
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('forgot_password') }}">Forgot Password</a></li>
+
           {% elif session.get('role') == 'Admin' %}
             <!-- Admin links -->
             <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
