@@ -200,6 +200,26 @@ def view_order(order_id):
 
     return render_template('orders/view.html', order=order)
 
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        new_password = request.form['new_password']
+        hashed_password = generate_password_hash(new_password)
+
+        db = get_db()
+        user = db.execute('SELECT * FROM customers WHERE email = ?', (email,)).fetchone()
+
+        if user:
+            db.execute('UPDATE customers SET password = ? WHERE email = ?', (hashed_password, email))
+            db.commit()
+            flash('Password reset successful. You can now log in with your new password.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Email not found. Please check and try again.', 'danger')
+
+    return render_template('forgot_password.html')
+
 @app.route('/orders/<int:order_id>/delete', methods=['POST'])
 def delete_order(order_id):
     db = get_db()
