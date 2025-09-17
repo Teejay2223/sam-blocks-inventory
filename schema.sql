@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS payments (
     status TEXT DEFAULT 'Pending',
     FOREIGN KEY (order_id) REFERENCES orders (id)
 );
+
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
@@ -79,7 +80,7 @@ CREATE TABLE IF NOT EXISTS products (
 );
 
 INSERT INTO products (name, description, size, price) VALUES
-('Standard Block', 'A durable block suitable for general construction.', '400x200x200 mm', 50.00),
-('Hollow Block', 'A lightweight block for partition walls.', '400x200x150 mm', 45.00),
-('Custom Block', 'Custom-sized blocks for special projects.', 'Variable', 60.00);
+('8 INCHES ENGINE Standard ', 'A durable block suitable for general construction.', '400x200x200 mm', 450.00),
+('9 INCHES ENGINE STANDARD', 'A lightweight block for partition walls.', '400x200x150 mm', 550.00),
+('6 INCHES ENGINE STANDARD', 'Custom-sized blocks for special projects.', 'Variable', 400.00);
 

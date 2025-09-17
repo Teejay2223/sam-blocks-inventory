@@ -69,19 +69,47 @@ def index():
 def add_order():
     db = get_db()
     if request.method == 'POST':
-        customer_id = request.form['customer_id']
-        item_type = request.form['item_type']
+        customer_id = int(request.form['customer_id'])
+        product_id = int(request.form['product_id'])
         qty = int(request.form['qty'])
 
-        # Insert the order into the database
+        # Get product price
+        product = db.execute(
+            'SELECT price FROM products WHERE id = ?',
+            (product_id,)
+        ).fetchone()
+
+        if not product:
+            flash("Invalid product selected.", "danger")
+            return redirect(url_for('add_order'))
+
+        unit_price = product['price']
+        total_amount = unit_price * qty
+
+        # Insert order
         db.execute(
             'INSERT INTO orders (customer_id, item_type, qty) VALUES (?, ?, ?)',
-            (customer_id, item_type, qty)
+            (customer_id, str(product_id), qty)
         )
         db.commit()
 
-        flash('Order placed successfully!', 'success')
+        # Get last order ID
+        order_id = db.execute('SELECT last_insert_rowid() as id').fetchone()['id']
+
+        # Insert payment record with calculated amount
+        db.execute(
+            'INSERT INTO payments (order_id, amount, status) VALUES (?, ?, ?)',
+            (order_id, total_amount, 'Pending')
+        )
+        db.commit()
+
+        flash(f'Order created! Payment of ₦{total_amount:.2f} is pending.', 'success')
         return redirect(url_for('list_orders'))
+
+    customers = db.execute('SELECT * FROM customers').fetchall()
+    products = db.execute('SELECT * FROM products').fetchall()
+    return render_template('orders/add.html', customers=customers, products=products)
+
 
     # Fetch customers for the dropdown in the form
     customers = db.execute('SELECT id, name FROM customers').fetchall()
@@ -311,6 +339,15 @@ def login():
         else:
             flash('Invalid login credentials. Please try again.', 'danger')
     return render_template('login.html')
+
+@app.route('/sales')
+def sales_report():
+    # Demo data for presentation
+    months = ["January", "February", "March", "April", "May", "June"]
+    total_sales = [1200, 1900, 3000, 2500, 2800, 3200]
+
+    return render_template('sales.html', months=months, total_sales=total_sales)
+
 
 @app.route('/dashboard')
 def dashboard():
