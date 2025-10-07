@@ -13,11 +13,8 @@
 
   <div class="mb-3">
     <label for="product" class="form-label">Product</label>
-    <select name="product_id" class="form-control" required>
-      {% for product in products %}
-      <option value="{{ product.id }}">{{ product.name }} (₦{{ product.price }})</option>
-      {% endfor %}
-    </select>
+     <label for="item_type">Item Type:</label> 
+    <input type="text" name="item_type" class="form-control" required><br>
   </div>
 
   <div class="mb-3">
